@@ -2,13 +2,13 @@
 'use strict';
 
 
-var http = require("http");
-var phantom = require("phantom");
-var fs = require("fs");
-var q = require('q');
-var path = require('path');
-var findRemove = require('find-remove');
-var _ = require('lodash');
+var http = require("http"),
+    phantom = require("phantom"),
+    fs = require("fs"),
+    q = require('q'),
+    path = require('path'),
+    findRemove = require('find-remove'),
+    _ = require('lodash');
 
 
 var _opts = {
@@ -21,7 +21,8 @@ var _opts = {
     idLength: 30,
     possibleIdChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
     loadTimeout: 500,
-    autoCleanFileAgeInSec: 20
+    autoCleanFileAgeInSec: 20,
+    debug: false
 };
 
 
@@ -37,19 +38,31 @@ module.exports = {
 };
 
 
-
 function render(string, opts, renderType) {
-    var deferred = q.defer();
-    var page, fileName, ph, fullPath;
+        opts = mergeOpts(opts);
 
-    opts = mergeOpts(opts);
-    phantom.create(['--ignore-ssl-errors=yes'])
+    var deferred = q.defer(),
+        page, fileName, ph, fullPath,
+
+        // log phantoms output in debugging mode
+        phantomOpts = opts.debug ? { logLevel: 'debug' } : {};
+
+    phantom.create(['--ignore-ssl-errors=yes'], phantomOpts)
         .then(function(_ph) {
             ph = _ph;
             return ph.createPage();
         })
         .then(function(_page) {
             page = _page;
+
+            // log messages from phantom browser console in debugging mode
+            if(opts.debug){
+                page.property('onConsoleMessage', function(msg) {
+                    console.log("Phantom console Message:");
+                    console.log(msg);
+                });
+            }
+
             return page.property("paperSize", opts.paperSize);
         })
         .then(function() {
@@ -87,7 +100,6 @@ function render(string, opts, renderType) {
 }
 
 
-
 function mergeOpts(newOpts) {
     if (newOpts) {
         return _.merge({}, _opts, newOpts);
@@ -116,16 +128,9 @@ function makeid(strLength) {
 }
 
 
-function closure(fn) {
-    var _arguments = arguments;
-    delete arguments[0];
-    return function() {
-        fn.apply(_arguments);
-    };
-}
-
-function _cleanup(ageInSeconds) {
-   return findRemove(_opts.saveDir, {
+function _cleanup(ageInSeconds, opts) {
+   opts = mergeOpts(opts);
+   return findRemove(opts.saveDir, {
        age: {
            seconds: ageInSeconds
        }
