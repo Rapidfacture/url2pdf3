@@ -82,7 +82,8 @@ You can set the configuration options globally by editing the `url2pdf.opts` obj
       saveDir: path.join(__dirname, "pdfTemp"), // path for temporary files
       idLength: 30 // file ID length; adjust to avoid conflicts or just get smaller filenames
       loadTimeout: 800, // in ms; time for rendering the page
-      autoCleanFileAgeInSec: 24 * 3600 // [s]; older files are removed; set to "-1" to disable remove
+      autoCleanFileAgeInSec: 24 * 3600; // [s]; older files are removed; set to "-1" to disable remove
+      debug: false // enable to log PhantomJS output in debugging mode  + PhantomJS console messages on your console
     };
 ```
 
