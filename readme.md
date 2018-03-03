@@ -5,8 +5,6 @@ Phantom renders the printing version.
 Can be used for generating bills, protocols, lists, etc. from a website.
 
 
-
-
 ## Installation ##
 
     npm install url2pdf --save
@@ -58,6 +56,20 @@ just for this purpose? Easy! Just do as below:
             })
     }
 ```
+
+#### Join Pdfs
+
+```javascript
+    var url2pdf = require("url2pdf");
+
+   // read file in, delete file, return content
+   const jointPdfFile = url2pdf.join(filepaths, '/exportDir', 'onlyFile');
+
+   // alternative: leave the file and return url
+   const jointPdfUrl = url2pdf.join(filepaths);
+```
+
+This requires ghostscript on your system which is executed over command line.
 
 #### Manual cleanup
 url2pdf comes with an auto cleanup function that will delete old files in your temp directory. For a manual cleanup disable the auto cleanup in the function call:

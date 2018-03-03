@@ -1,42 +1,34 @@
 {
-  "name": "url2pdf",
-  "version": "0.5.1",
+  "name": "url2pdf-plus",
+  "version": "0.5.5",
   "description": "Fetches a URL and converts HTML to PDF files using PhantomJS",
+  "author": {
+    "name": "Felix Furtmayr"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:FelixFurtmayr/url2pdf.git"
+  },
+  "maintainers": [
+    {
+      "name": "Felix Furtmayr",
+      "email": "ff@rapidfacture.com"
+    }
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ryan Knell",
-  "license": "ISC",
+
   "dependencies": {
-    "bindings": "^1.2.1",
-    "find-remove": "^0.2.10",
-    "lodash": "^4.8.1",
+    "bindings": "1.3.0",
+    "find-remove": "1.2.0",
+    "lodash": "4.17.5",
     "phantom": "^2.0.9",
     "q": "^1.1.2"
   },
-  "_shasum": "cce8fd909f7464b54f16b91a69d1fd18c650edd8",
-  "_from": "url2pdf@latest",
-  "_npmVersion": "2.1.10",
-  "_nodeVersion": "0.10.22",
-  "_npmUser": {
-    "name": "ryanknell",
-    "email": "sales@snappyapps.com.au"
-  },
-  "maintainers": [
-    "ryanknell <sales@snappyapps.com.au>"
-  ],
-  "dist": {
-    "shasum": "cce8fd909f7464b54f16b91a69d1fd18c650edd8",
-    "tarball": "http://registry.npmjs.org/url2pdf/-/url2pdf-0.0.2.tgz"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/url2pdf/-/url2pdf-0.0.2.tgz",
   "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rknell/url2pdf.git"
-  },
   "keywords": [
     "html2pdf",
     "url2pdf",
@@ -44,8 +36,4 @@
     "to",
     "pdf"
   ],
-  "bugs": {
-    "url": "https://github.com/rknell/url2pdf/issues"
-  },
-  "homepage": "https://github.com/rknell/url2pdf#readme"
 }
