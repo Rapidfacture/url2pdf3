@@ -24,15 +24,15 @@ Note that url2pdf3 requires NodeJS >= 7.6 due to heavy use of async/await.
 #### PDF from URL
 
 ```javascript
-    const fs = require("mz/fs");
-    const url2pdf3 = require("url2pdf3");
+const fs = require("mz/fs");
+const url2pdf3 = require("url2pdf3");
 
-    url2pdf3.renderURL("https://www.google.com")
-    	.then(pdf => {
-            fs.writeFile("mypdf.pdf").then(() =>
-                console.log("See mypdf.pdf!")
-            )
-    	});
+url2pdf3.renderURL("https://www.google.com")
+    .then(pdf => {
+        fs.writeFile("mypdf.pdf").then(() =>
+            console.log("See mypdf.pdf!")
+        )
+    });
 ```
 
 #### PDF From HTML String
@@ -40,11 +40,11 @@ Note that url2pdf3 requires NodeJS >= 7.6 due to heavy use of async/await.
 Note that loading external resources from the HTML is possible.
 
 ```javascript
-    const url2pdf3 = require("url2pdf3");
-    url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
-    	.then(function(path){
-	    	console.log("Rendered pdf @", path);
-    	});
+const url2pdf3 = require("url2pdf3");
+url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
+    .then(function(path){
+        console.log("Rendered pdf @", path);
+    });
 ```
 
 ## Options
