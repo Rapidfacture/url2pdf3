@@ -2,6 +2,8 @@ const _ = require('lodash');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('mz/fs');
+const {combinePDF} = require('pdf-toolz/SplitCombine');
+
 const {WithTempDir} = require('with-tmp-dir-promise');
 
 /**
@@ -14,6 +16,17 @@ function renderHTML (html, opts = {}) {
 }
 
 /**
+ * Render multiple URLs independently, joining
+ * all resulting PDFs in the given order.
+ */
+async function renderURLs (urls, opts = {}) {
+   const promises = urls.map(url => renderURL(url, opts));
+   const pdfs = await Promise.all(promises);
+   // Join
+   return combinePDF(pdfs);
+}
+
+/**
  * Render an URL to a PDF
  * @param {any} url The URL to render
  * @param {any} [opts={}] See _render
@@ -21,6 +34,7 @@ function renderHTML (html, opts = {}) {
 function renderURL (url, opts = {}) {
    return _render(url, false /* url */, opts);
 }
+
 
 const _defaultRenderOpts = {
    format: 'A4',
@@ -80,5 +94,6 @@ async function _render (string, stringIsHTML = true, opts = {}) {
 
 module.exports = {
    renderHTML: renderHTML,
-   renderURL: renderURL
+   renderURL: renderURL,
+   renderURLs: renderURLs
 };

@@ -35,6 +35,20 @@ url2pdf3.renderURL("https://www.google.com")
     });
 ```
 
+#### Render multiple URLs & automatically join the resulting pages
+
+```javascript
+const fs = require("mz/fs");
+const url2pdf3 = require("url2pdf3");
+
+url2pdf3.renderURL(["https://www.google.com", "https://wikipedia.org"])
+    .then(pdf => {
+        fs.writeFile("mypdf.pdf").then(() =>
+            console.log("See mypdf.pdf!")
+        )
+    });
+```
+
 #### PDF From HTML String
 
 Note that loading external resources from the HTML is possible.
@@ -58,3 +72,5 @@ url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
 
 `url2pdf-plus` also supported joining PDFs but this functionality has now been
 rewritten and is now available in the [pdf-toolz](https://github.com/Rapidfacture/pdf-toolz) package.
+
+Note that rendering multiple URLs and automatically concatenating the PDFs is supported.
