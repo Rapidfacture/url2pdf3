@@ -39,6 +39,7 @@ function renderURL (url, opts = {}) {
 const _defaultRenderOpts = {
    format: 'A4',
    scale: 1.5,
+   waitUntil: 'networkidle2',
    margin: {
       top: '1cm',
       left: '1cm',
