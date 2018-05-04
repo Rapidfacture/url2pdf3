@@ -41,7 +41,7 @@ url2pdf3.renderURL("https://www.google.com")
 const fs = require("mz/fs");
 const url2pdf3 = require("url2pdf3");
 
-url2pdf3.renderURL(["https://www.google.com", "https://wikipedia.org"])
+url2pdf3.renderURLs(["https://www.google.com", "https://wikipedia.org"])
     .then(pdf => {
         fs.writeFile("mypdf.pdf", pdf).then(() =>
             console.log("See mypdf.pdf!")
