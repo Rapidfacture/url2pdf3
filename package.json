@@ -1,6 +1,6 @@
 {
   "name": "url2pdf3",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Renders HTML to PDF files using Puppetteer. Successor of url2pdf-plus",
   "author": {
     "name": "Uli Köhler"
