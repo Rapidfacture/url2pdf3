@@ -19,9 +19,7 @@ Note that url2pdf3 requires NodeJS >= 7.6 due to heavy use of async/await.
 
 In order to avoid experiencing missing native library issues like
 
-```
-/home/user/erp/node_modules/puppeteer/.local-chromium/linux-555668/chrome-linux/chrome: error while loading shared libraries: libX11-xcb.so.1: cannot open shared object file: No such file or directory
-```
+> /home/user/erp/node_modules/puppeteer/.local-chromium/linux-555668/chrome-linux/chrome: error while loading shared libraries: libX11-xcb.so.1: cannot open shared object file: No such file or directory
 
 also install the native libraries that chrome needs.
 
