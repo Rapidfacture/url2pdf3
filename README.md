@@ -5,11 +5,11 @@ Render URLs or HTML to a PDF.
 Can be used for generating bills, protocols, lists, etc. from a website.
 
 url2pdf3 is the official successor of [url2pdf-plus](https://github.com/FelixFurtmayr/url2pdf-plus), with the following advantages7
-    * Uses puppetteer (based on Chromium), not the deprecated PhantomJS
-    * Actual wait events instead of unreliable timeout approach
-    * Does not use temporary files you have to read but returns binary buffers
-    * No temporary file cleanup process required ([with-tmp-dir-promise](https://github.com/Rapidfacture/with-tmp-dir-promise))
-    * Clean source code due to async/await
+* Uses puppetteer (based on Chromium), not the deprecated PhantomJS
+* Actual wait events instead of unreliable timeout approach
+* Does not use temporary files you have to read but returns binary buffers
+* No temporary file cleanup process required ([with-tmp-dir-promise](https://github.com/Rapidfacture/with-tmp-dir-promise))
+* Clean source code due to async/await
 
 ## Installation ##
 
