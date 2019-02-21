@@ -1,6 +1,6 @@
 # url2pdf3
 ---
-Render URLs or HTML to a PDF.
+Render URLs or HTML to a PDF or take a screenshot.
 
 Can be used for generating bills, protocols, lists, etc. from a website.
 
