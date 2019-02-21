@@ -29,7 +29,8 @@ Credits to [@Coldner](https://github.com/coldner")@ on [the puppetteer issue tra
 
 ## Getting started ##
 
-    node examples.js
+    node example-pdf.js
+    node example-screenshot.js
 
 #### PDF from URL
 
@@ -41,6 +42,20 @@ url2pdf3.renderURL("https://www.google.com")
     .then(pdf => {
         fs.writeFile("mypdf.pdf", pdf).then(() =>
             console.log("See mypdf.pdf!")
+        )
+    });
+```
+
+#### Screenshot from URL
+
+```javascript
+const fs = require("mz/fs");
+const url2pdf3 = require("url2pdf3");
+
+url2pdf3.renderURL("https://www.google.com", {screenshot: true})
+    .then(pdf => {
+        fs.writeFile("myscreenshot.png", pdf).then(() =>
+            console.log("See myscreenshot.png!")
         )
     });
 ```

@@ -84,12 +84,20 @@ async function _render (string, stringIsHTML = true, opts = {}) {
          await page.goto(string, {waitUntil: waitUntil}); // string = url path
       }
       // Create PDF
-      const pdffile = path.join(tmpdir, 'temp.pdf');
-      await page.pdf(_.merge(renderOpts, {
-         path: pdffile
-      }));
+      let file = null;
+      if (opts.screenshot) {
+         // Create screenshot
+         file = path.join(tmpdir, 'temp.png');
+         await page.screenshot({path: file});
+      } else { // !opts.screenshot => default mode: PDF
+         file = path.join(tmpdir, 'temp.pdf');
+         await page.pdf(_.merge(renderOpts, {
+            path: file
+         }));
+      }
+      // Return the file as Buffer
       await browser.close();
-      return fs.readFile(pdffile);
+      return fs.readFile(file);
    }, { unsafeCleanup: true, prefix: 'url2pdf3-' });
 }
 
