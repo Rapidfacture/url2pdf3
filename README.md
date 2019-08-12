@@ -80,9 +80,13 @@ Note that loading external resources from the HTML is possible.
 
 ```javascript
 const url2pdf3 = require("url2pdf3");
+const fs = require("fs");
 url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
-    .then(function(path){
-        console.log("Rendered pdf @", path);
+    .then(function(pdf){
+        fs.writeFile('output.pdf',pdf, function(err){
+            if(err) {console.error(err)}
+            else {console.log('saved pdf to output.pdf')}
+        });
     });
 ```
 
