@@ -71,7 +71,8 @@ async function _render (string, stringIsHTML = true, opts = {}) {
    const renderOpts = {
       format: opts.format || _defaultRenderOpts.format,
       margin: margin,
-      scale: opts.scale || _defaultRenderOpts.scale
+      scale: opts.scale || _defaultRenderOpts.scale,
+      landscape: opts.landscape
    };
    // Run puppetteer in temporary directory, which is deleted afterwards
    return WithTempDir(async (tmpdir) => {
