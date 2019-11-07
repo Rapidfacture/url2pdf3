@@ -35,6 +35,14 @@ function renderURL (url, opts = {}) {
    return _render(url, false /* url */, opts);
 }
 
+/**
+ * Find out if the current process is run by the root user
+ * https://techoverflow.net/2019/11/07/how-to-check-if-nodejs-is-run-by-root/
+ */
+function isCurrentUserRoot() {
+   return process.getuid() == 0; // UID 0 is always root
+}
+
 
 const _defaultRenderOpts = {
    format: 'A4',
@@ -76,7 +84,10 @@ async function _render (string, stringIsHTML = true, opts = {}) {
    };
    // Run puppetteer in temporary directory, which is deleted afterwards
    return WithTempDir(async (tmpdir) => {
-      const browser = await puppeteer.launch({headless: true});
+      const browser = await puppeteer.launch({
+         headless: true,
+         args: isCurrentUserRoot() ? ['--no-sandbox'] : undefined
+      });
       const page = await browser.newPage();
       // Load content
       if (stringIsHTML) {

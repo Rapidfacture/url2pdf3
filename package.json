@@ -22,7 +22,7 @@
     "lodash": "^4.17.5",
     "mz": "^2.7.0",
     "pdf-toolz": "^1.1.0",
-    "puppeteer": "^1.3.0",
+    "puppeteer": "2.0.0",
     "with-tmp-dir-promise": "^1.0.3"
   },
   "devDependencies": {},
