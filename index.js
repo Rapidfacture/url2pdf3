@@ -36,7 +36,7 @@ function renderURL (url, opts = {}) {
 }
 
 /**
- * Find out if the current process is run by the root user
+ * Return true if the current process is run by the root user
  * https://techoverflow.net/2019/11/07/how-to-check-if-nodejs-is-run-by-root/
  */
 function isCurrentUserRoot() {
