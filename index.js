@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('mz/fs');
 const {combinePDF} = require('pdf-toolz/SplitCombine');
 
-const {WithTempDir} = require('with-tmp-dir-promise');
+const {withTempDir} = require('with-tmp-dir-promise');
 
 /**
  * Render HTML to a PDF
@@ -39,7 +39,8 @@ function renderURL (url, opts = {}) {
  * Return true if the current process is run by the root user
  * https://techoverflow.net/2019/11/07/how-to-check-if-nodejs-is-run-by-root/
  */
-function isCurrentUserRoot() {
+function isCurrentUserRoot () {
+   /* eslint-disable-next-line */
    return process.getuid() == 0; // UID 0 is always root
 }
 
@@ -83,11 +84,16 @@ async function _render (string, stringIsHTML = true, opts = {}) {
       landscape: opts.landscape
    };
    // Run puppetteer in temporary directory, which is deleted afterwards
-   return WithTempDir(async (tmpdir) => {
-      const browser = await puppeteer.launch({
+   return withTempDir(async (tmpdir) => {
+      let puppeteerOpts = {
          headless: true,
          args: isCurrentUserRoot() ? ['--no-sandbox'] : undefined
-      });
+      };
+
+      opts.puppeteer = opts.puppeteer || {};
+      Object.assign(puppeteerOpts, opts.puppeteer);
+
+      const browser = await puppeteer.launch(puppeteerOpts);
       const page = await browser.newPage();
       // Load content
       if (stringIsHTML) {

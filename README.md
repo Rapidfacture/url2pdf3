@@ -92,10 +92,26 @@ url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
 
 ## Options
 
- * format: e.g. 'A4'
- * scale: Scale factor. Default 1.5 for approximate PhantomJS compatibility
- * waitUntil: A puppetter wait specification. Usually, the default 'networkidle2' is the right choice.
- * margin: Either a string ('1cm') => same on all sides or an object containing left, right, top & bottom keys
+ ```javascript
+{
+    // defaults
+    format: 'A4',
+    scale: 1.5,
+    waitUntil: 'networkidle2', //
+    margin: { // can be also just margin: '1cm'
+       top: '1cm',
+       left: '1cm',
+       right: '1cm',
+       bottom: '1cm'
+    }
+
+    // for debugging
+    puppeteer:{
+      headless: false,
+      devtools: true
+   }
+}
+ ```
 
 ## Joining PDFs.
 
