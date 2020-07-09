@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('mz/fs');
 const {combinePDF} = require('pdf-toolz/SplitCombine');
 
-const {withTempDir} = require('with-tmp-dir-promise');
+const withTempDir = require('with-tmp-dir-promise').WithTempDir;
 
 /**
  * Render HTML to a PDF
