@@ -113,6 +113,10 @@ url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
 }
  ```
 
+* url2pdf3 and puppeteer options are passed through
+* default options are supplemented and / or replaced with transferred options
+* now you can use puppeteerOpts e.g.: headerTemplate and displayHeaderFooter
+
 ## Joining PDFs.
 
 `url2pdf-plus` also supported joining PDFs but this functionality has now been

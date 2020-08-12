@@ -48,7 +48,6 @@ function isCurrentUserRoot () {
 const _defaultRenderOpts = {
    format: 'A4',
    scale: 1.5,
-   waitUntil: 'networkidle2',
    margin: {
       top: '1cm',
       left: '1cm',
@@ -69,30 +68,27 @@ const _defaultRenderOpts = {
  * @returns A promise of a binary PDF buffer.
  */
 async function _render (string, stringIsHTML = true, opts = {}) {
-   // Build render options
-   let margin = opts.margin || _defaultRenderOpts.margin;
-   if (!_.isObject(margin)) { // Same on all sides
-      margin = {
-         left: margin, right: margin, top: margin, bottom: margin
-      };
+
+   // render options
+   let renderOpts = JSON.parse(JSON.stringify(_defaultRenderOpts));
+   for (var key in opts) { // we extract all options here for rendering
+      if (key !== 'waitUntil' && key !== 'puppeteer') {
+         renderOpts[key] = opts[key];
+      }
    }
-   const waitUntil = opts.waitUntil || _defaultRenderOpts.waitUntil;
-   const renderOpts = {
-      format: opts.format || _defaultRenderOpts.format,
-      margin: margin,
-      scale: opts.scale || _defaultRenderOpts.scale,
-      landscape: opts.landscape
+
+   // puppeteer options
+   const waitUntil = opts.waitUntil || 'networkidle2';
+   let puppeteerOpts = {
+      headless: true,
+      args: isCurrentUserRoot() ? ['--no-sandbox'] : undefined
    };
+   opts.puppeteer = opts.puppeteer || {};
+   Object.assign(puppeteerOpts, opts.puppeteer);
+
+
    // Run puppetteer in temporary directory, which is deleted afterwards
    return withTempDir(async (tmpdir) => {
-      let puppeteerOpts = {
-         headless: true,
-         args: isCurrentUserRoot() ? ['--no-sandbox'] : undefined
-      };
-
-      opts.puppeteer = opts.puppeteer || {};
-      Object.assign(puppeteerOpts, opts.puppeteer);
-
       const browser = await puppeteer.launch(puppeteerOpts);
       const page = await browser.newPage();
       // Load content
