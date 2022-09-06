@@ -72,7 +72,7 @@ async function _render (string, stringIsHTML = true, opts = {}) {
    // render options
    let renderOpts = JSON.parse(JSON.stringify(_defaultRenderOpts));
    for (var key in opts) { // we extract all options here for rendering
-      if (key !== 'waitUntil' && key !== 'puppeteer') {
+      if (key !== 'waitUntil' && key !== 'puppeteer' && key !== 'pageOpts') {
          renderOpts[key] = opts[key];
       }
    }
@@ -86,6 +86,10 @@ async function _render (string, stringIsHTML = true, opts = {}) {
    opts.puppeteer = opts.puppeteer || {};
    Object.assign(puppeteerOpts, opts.puppeteer);
 
+   // page options
+   let pageOpts = {waitUntil: waitUntil};
+   opts.pageOpts = opts.pageOpts || {};
+   Object.assign(pageOpts, opts.pageOpts);
 
    // Run puppetteer in temporary directory, which is deleted afterwards
    return withTempDir(async (tmpdir) => {
@@ -93,9 +97,9 @@ async function _render (string, stringIsHTML = true, opts = {}) {
       const page = await browser.newPage();
       // Load content
       if (stringIsHTML) {
-         await page.setContent(string, {waitUntil: waitUntil}); // string = html doc as string
+         await page.setContent(string, pageOpts); // string = html doc as string
       } else { // String is an URL
-         await page.goto(string, {waitUntil: waitUntil}); // string = url path
+         await page.goto(string, pageOpts); // string = url path
       }
       // Create PDF
       let file = null;
