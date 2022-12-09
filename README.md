@@ -103,7 +103,9 @@ url2pdf3.renderHTML("<html><body><h1>HELLO WORLD</h1></body></html>")
        left: '1cm',
        right: '1cm',
        bottom: '1cm'
-    }
+    },
+    pageOpts: { timeout: 60000 }, // Increases the timeout for loading page to 60 seconds
+    
 
     // for debugging
     puppeteer:{
