@@ -40,8 +40,14 @@ function renderURL (url, opts = {}) {
  * https://techoverflow.net/2019/11/07/how-to-check-if-nodejs-is-run-by-root/
  */
 function isCurrentUserRoot () {
-   /* eslint-disable-next-line */
-   return process.getuid() == 0; // UID 0 is always root
+   // Try / catch block required for Windows OS as getuid is not supported
+   try {
+      /* eslint-disable-next-line */
+      return process.getuid() == 0; // UID 0 is always root
+
+   } catch (e) {
+      return true;
+   }
 }
 
 
